@@ -19,7 +19,7 @@ keys.addEventListener('click', event => {
   if (!target.matches('button')) {
     return;
   } else {
-    console.log(event);
+    calculator.parseInput(value);
   }
 });
 
@@ -31,6 +31,7 @@ const calculator = {
     switch (value) {
       case '=':
         // calculateAnswer
+        this.calcAnswer(this.displayText);
         break;
       case 'AC':
         // clear screen and stored values
@@ -73,5 +74,10 @@ const calculator = {
   },
   outputText(text) {
     document.querySelector('.calculatorScreen').value = text;
+  },
+  calcAnswer(equ) {
+    const result = Function("return "+equ)()
+    this.outputText(result);
+    this.displayText= result;
   },
 };
